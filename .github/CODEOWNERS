@@ -1,0 +1,11 @@
+/.github/workflows/                      @
+/.github/agents/                         @
+/.github/instructions/                   @
+/.github/copilot-instructions.md         @
+/.github/CODEOWNERS                      @
+/.vscode/mcp.json                        @
+/AGENTS.md                               @
+/alembic/                                @
+/pyproject.toml                          @
+/docker-compose.yml                      @
+/docker-compose.unittests.yml            @
