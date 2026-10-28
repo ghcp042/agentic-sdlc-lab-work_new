@@ -1,0 +1,64 @@
+name: Agent task contract
+about: Define a scoped task for an autonomous agent.
+labels:
+  - agent-task
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: State the objective of the task.
+      placeholder: Describe the goal clearly and concretely.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context-links
+    attributes:
+      label: Context links
+      description: Add relevant issue, PR, docs, or code references.
+      placeholder: Add URLs or references that provide context.
+
+  - type: input
+    id: in-scope
+    attributes:
+      label: In-scope paths
+      description: Comma-separated file or directory paths to modify.
+      placeholder: src/, tests/unit/, app/modules/users/
+    validations:
+      required: true
+
+  - type: input
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      default: alembic/, .github/, pyproject.toml, any new dependency
+      description: Explicitly exclude paths and changes that are not part of this task.
+      placeholder: alembic/, .github/, pyproject.toml, any new dependency
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Define the conditions that must be met for the task to be considered complete.
+      placeholder: List measurable completion criteria.
+    validations:
+      required: true
+
+  - type: textarea
+    id: stop
+    attributes:
+      label: Stop and ask a human if
+      description: Specify scenarios where the agent should halt and request guidance.
+      placeholder: Describe conditions that require human input.
+    validations:
+      required: true
+
+  - type: input
+    id: reviewer
+    attributes:
+      label: Reviewer
+      description: Name the reviewer responsible for sign-off.
+      placeholder: "@username or team"
