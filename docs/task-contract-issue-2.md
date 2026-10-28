@@ -1,0 +1,7 @@
+**Goal:** Fix the order cancellation flow so a DELIVERED order is rejected by POST /orders/{id}/cancel with HTTP 400 instead of being cancelled.
+**Context:** Issue #2: "Delivered orders can be cancelled". The current route calls cancel_order_with_invoice, which delegates to cancel_order without checking whether the order is already terminal; the order state machine allows DELIVERED to be a terminal state with no valid transition to CANCELLED.
+**In scope:** app/modules/orders/service.py; app/modules/orders/routes.py; the focused order cancellation tests in tests/unit and/or tests/integration that cover transition validation and route behavior.
+**Out of scope:** alembic/, .github/, pyproject.toml, any new dependency, unrelated payment logic, unrelated order CRUD behavior, and changes outside the order cancellation validation path.
+**Acceptance:** - POST /orders/{id}/cancel for an order in DELIVERED returns 400; - the response indicates the invalid transition and the order remains unchanged; - a valid cancellation path for non-terminal orders still works; - the behaviour is covered by a failing test before the fix and remains enforced by the existing assertions.
+**Stop and ask a human if:** the intended business rule for cancelling a DELIVERED order is unclear, the state machine contract conflicts with the expected product behavior, or the fix would require changing public API semantics beyond the cancellation validation.
+**Reviewer:** @maintainers
